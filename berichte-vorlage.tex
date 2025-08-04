@@ -1,0 +1,55 @@
+\documentclass[12pt,a4paper]{scrartcl}
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc} %  Alternativ unter Windows
+\usepackage[T1]{fontenc}
+\usepackage[paper=a4paper,
+	left=25mm,
+	right=25mm,
+	top=25mm,
+	bottom=20mm]{geometry}
+\usepackage[nottoc]{tocbibind}
+\usepackage[ngerman]{babel}
+\usepackage[pdftex]{graphicx}
+\usepackage{latexsym}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+
+\newtheorem{Satz}{Satz}[section]
+\newtheorem{Definition}[Satz]{Definition} 
+\newtheorem{Lemma}[Satz]{Lemma}		                 
+\newtheorem{Korollar}[Satz]{Korollar}
+\newtheorem{Proposition}[Satz]{Proposition}                  
+\newtheorem{examples}[Satz]{Beispiel}
+\let\oldexamples\examples
+\renewcommand{\examples}{\oldexamples\normalfont}
+\newtheorem*{notation}{Notation}
+\let\oldnotation\notation
+\renewcommand{\notation}{\oldnotation\normalfont}
+\newtheorem*{remark}{Bemerkung}
+\let\oldremark\remark
+\renewcommand{\remark}{\oldremark\normalfont}                  
+                              
+\numberwithin{equation}{section} 
+
+% Praktikumsbericht nummer setzen
+\newcommand{\BerichtNR}{1}
+
+\begin{document}
+\input{titlepage}
+
+%\tableofcontents
+%\newpage 
+%\pagestyle{headings}
+
+\section{Problemstellung}
+
+TODO: Beschreibung der Problemstellung, Beschreibung der Aufgabenstellung und Beschreibung der numerischen Verfahren
+
+
+\section{Ergebnisse}
+
+TODO: Dokumentation der im Praktikum erzielten Ergebnisse 
+
+
+\end{document}
+

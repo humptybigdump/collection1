@@ -1,0 +1,39 @@
+\documentclass[oneside,a4paper,12pt,table]{scrreprt} % Gibt an: Papierformat, Schriftgröße
+
+\usepackage[table]{xcolor}
+\usepackage{FormatierungenVorlage}
+
+% Schriftart
+\usepackage{lmodern} 
+%\usepackage[center]{caption}
+\usepackage[nooneline]{caption}
+
+% Zitierstil
+\usepackage[natbibapa,numberedbib,sectionbib]{apacite}
+\bibliographystyle{apacite}
+
+
+\begin{document}
+	
+% Sprache einstellen.
+\setlanguageGerman 
+\setlength{\parindent}{1cm}
+
+
+% Hier kommt der ganze Vorspann wie Abkürzungs-, Abbildungs- oder Tabellenverzeichnisse
+\include{sections/preamble}
+
+% Füge hier die Kapitel per Verweis ein. Der Befehl \include fügt die angegebene tex-Datei an der jeweiligen Stelle ein. Die eingefügte Datei wird als normaler Teil des Quelltextes mitverarbeitet und ist daher LaTeX-Code (ohne Vorspann und \begin{document}...\end{document}).
+
+\include{sections/Einleitung}
+\include{sections/Forschungsfragen}
+\include{sections/Diskussion}
+\include{sections/Fazit}
+
+% Literaturverzeichnis
+\newpage
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+% Datei mit Literaturangaben einbinden (am einfachsten Quellen aus Citavi als BibTeX-Datei exportieren)
+%\bibliography{ATM_Quellen} 
+
+\end{document}

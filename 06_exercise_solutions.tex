@@ -1,0 +1,99 @@
+\input{../exercise_preamble.tex}
+
+\begin{document}
+
+\author{}
+\date{}
+\title{Optimization Methods for \\Machine Learning and Engineering\\\vspace{0.5cm}\textit{Exercise 6}}
+\maketitle
+
+%\printallsolutions*[]
+
+\setcounter{section}{6}
+\setcounter{exercise}{0}
+
+
+%\begin{exercise}[subtitle={Paper}]
+%Show that the intersection of an infinite number of convex sets is convex.
+%\end{exercise}
+
+
+
+\begin{exercise}[subtitle={Paper}]
+%The optimization problem
+%\begin{align*}
+%\text{minimize}\quad &f(\vec{x})\\
+%\text{subject to}\quad & g_j(\vec{x})\leq 0,\quad j = 1,\dots, m\\
+% & h_i(\vec{x})= 0,\quad i = 1,\dots, k
+%\end{align*}
+%is convex iff $f(\vec{x})$ is convex, $g_j(\vec{x})$ is convex $\forall j \in {1,\dots,m}$ and $h_i(\vec{x})$ is affine $\forall i \in {1,\dots,k}$.\\
+Consider the following optimization problem with $\vec{x}\in \mathbb{R}^2$ and $\vec{x}^\top = (x_1,x_2)$:
+\begin{align*}
+\text{minimize}\quad &f(\vec{x}) = x_1^2 + x_2^2\\
+\text{subject to}\quad & g(\vec{x}) = x_1/(1+x_2^2)\leq 0,\\
+& h(\vec{x}) = (x_1 + x_2)^2 = 0.
+\end{align*}
+Is this a convex optimization problem? If not, can you reformulate it into an equivalent problem (same optimal point) which fulfills all criteria of a convex optimization problem?
+\end{exercise}
+
+
+\begin{solution}[print=true]
+\begin{align*}
+\text{minimize}\quad &f(\vec{x}) = x_1^2 + x_2^2\\
+\text{subject to}\quad & g(\vec{x}) = x_1\leq 0\\
+& h(\vec{x}) = x_1 + x_2 = 0
+\end{align*}
+\end{solution}
+
+
+\begin{exercise}[subtitle={Paper + Notebook}]
+  A company produces different paint for interior and exterior use. Paint
+  production uses the raw materials A and B. The production of one ton of
+  interior paint uses two tons of A and one ton of B. The production of one ton
+  of exterior paint uses up one ton of A and two tons of B. The availability of
+  the raw material is 6 tons of A and 7 tons of B per day.
+
+  The market price is 2k\texteuro{} per ton of interior paint and 3k\texteuro{}
+  per ton of exterior paint. A market study has predicted a daily sales
+  potential of two tons for interior paint and three tons for exterior paint.\\\\
+  What are the daily production rates that maximize revenue?
+
+\begin{enumerate}[label=\emph{\alph*)}]
+\item \textit{Paper:} State the optimization problem as a linear program of the form:
+  \begin{align*}
+    \min_{\vec x} \quad & \vec{c}^{\top} \vec{x}\\
+    \text{subject to} \quad & \mat A \vec{x} - \vec{b} \leq \vec{0}
+  \end{align*}
+\item \textit{Paper:} Sketch the feasible region.
+\item \textit{Notebook:} Solve the problem using the interior point method.
+\item \textit{Notebook:} Plot the precision of the intermediate solutions after each outer iteration versus the cumulative number of newton iterations needed in the inner iteration. What can you conclude from the plot?
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}[print=true]
+  \begin{align*}
+    \vec{c}^{\top} = (-2, -3), \quad
+    \mat A =
+    \begin{pmatrix}
+      1 & 0 \\
+      0  & 1\\
+      2 & 1\\
+      1 & 2
+    \end{pmatrix}, \quad
+    \vec{b}^{\top} = (2,3,6,7)
+  \end{align*}
+    \begin{equation*}
+    \vec x^* = (1.67, 2.67)^{\top}
+  \end{equation*}
+\end{solution}
+
+
+\begin{exercise}[subtitle={Notebook}]
+\begin{enumerate}[label=\emph{\alph*)}]
+\item Follow the instructions in the notebook and implement the method to find an admissible point given a set of constraints.
+\item Verify your implementation by searching for an admissible point for the problem in Exercise 6.2 given the inadmissible point $\vec{x} = (100,100)$. Make sure your method really results in an admissible point.
+%\item Apply your method to the example of the McDonald's diet (Exercise 5.4) with additional constraints for the maximum daily consumption of each nutrient. What can you conclude?
+\end{enumerate}
+\end{exercise}
+
+\end{document}

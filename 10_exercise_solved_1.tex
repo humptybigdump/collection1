@@ -1,0 +1,86 @@
+\input{../exercise_preamble.tex}
+
+\begin{document}
+
+\author{}
+\date{}
+\title{Optimization Methods for \\Machine Learning and Engineering\\\vspace{0.5cm}\textit{Exercise 10}}
+\maketitle
+
+%\printallsolutions*[]
+
+\setcounter{section}{10}
+\setcounter{exercise}{0}
+
+
+\begin{exercise}[subtitle={Paper}]
+%\begin{center}
+%\includegraphics[scale=1]{figures/FunctionGraph_backward4.pdf}
+%\end{center}
+
+Consider the function 
+\begin{equation}
+f(x_1,x_2) = (x_1+x_2) \cdot \ln(x_1+x_2)
+\end{equation}
+which can be expressed by the following graph.
+
+\begin{center}
+\includegraphics[scale=0.09]{figures/Zeichnung.pdf}
+\end{center}
+The intermediate variables $w_1, w_2$ and $w_5$ are defined as follows:
+\begin{align*}
+w_1 &= x_1\\
+w_2 &= x_2\\
+w_5 &= f(x_1,x_2)
+\end{align*}
+
+\begin{enumerate}[label=\emph{\alph*)}]
+\item Write down the definitions for $w_3$ and $w_4$ by taking into account the dependencies of the variables as shown in the graph.
+\item Evaluate the function at the point $(x_1,x_2) = (3,5)$ by calculating all intermediate variables $w_i$.
+\item Follow the dependencies in the graph from left to right and take the derivative of all $w_i$ w.r.t $x_1$: $\frac{\partial w_i}{\partial x_1}$. Beware that you have to apply the chain rule if $w_i$ does not directly depend on $x_1$.
+\item With dual numbers, a function's value and its derivative can be propagated through programming code at the same time. Write down the dual numbers of all intermediate variables $w_i$ and make their dependencies explicit. 
+%\item Evaluate the Jacobian matrix of the function $h: \mathbb{R}^2 \rightarrow \mathbb{R}^3$:
+%\begin{align*}
+%h(x_1,x_2) = \begin{pmatrix}
+%x_1 + x_2\\
+%x_1^2\\
+%\ln(x_1 + x_2)
+%\end{pmatrix}
+%\end{align*}
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}[subtitle={Notebook}]
+
+Consider the example of the application of automatic differentiation in space mission planning. We want to bring back our hero from Mars. You have given the code for dual numbers in the library \textit{ad.jl} and the simulation for the N-body problem in \textit{nBodySimulation.jl}. 
+
+\begin{enumerate}[label=\emph{\alph*)}]
+\item Inspect the loss function. In which region is the function smallest?
+\item Define the gradient function of \texttt{trajectory\_loss()} using the provided methods in \textit{ad.jl}
+\item Minimize the loss function and bring back the Martian. \textit{Hint:} Since the loss function is not convex, there is no guarantee that you found the global minimum. However, sometimes a "more optimal" solution than the starting point is already sufficient.
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}[subtitle={Paper + Notebook}]
+
+Consider the example of the MNIST classification using a neural network trained by using automatic differentiation.
+
+\begin{enumerate}[label=\emph{\alph*)}]
+%\item \textit{Paper:} Explain the purpose of the softmax function.
+\item \textit{Paper:} Why is the training of a neural network using Reverse Mode AD faster than Forward Mode AD?
+\item \textit{Bonus exercise: Notebook:} Train a neural network and classify the MNIST dataset using the provided code in the notebook.
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}[print=true]
+\begin{enumerate}[label=\emph{\alph*)}]
+%\item \textit{Paper:} Explain the purpose of the softmax function.
+\item The loss function for the example of training a neural network for the MNIST dataset is a function $f: \mathbb{R}^{784} \rightarrow \mathbb{R}^1$. It maps from a 784 dimensional (the number of pixels in the pictures) space to a scalar value. Backward mode AD is superior w.r.t. to the forward mode if the dimension of the input space is significantly larger than the output space. In our example backward mode can derive the function with respect to all its inputs with one pass through the code while forward mode would need 784 passes.
+\end{enumerate}
+
+\end{solution}
+
+
+\end{document}

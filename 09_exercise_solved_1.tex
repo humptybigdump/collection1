@@ -1,0 +1,160 @@
+\input{../exercise_preamble.tex}
+
+\begin{document}
+
+\author{}
+\date{}
+\title{Optimization Methods for \\Machine Learning and Engineering\\\vspace{0.5cm}\textit{Exercise 12}}
+\maketitle
+
+%\printallsolutions*[]
+
+\setcounter{section}{12}
+\setcounter{exercise}{0}
+
+
+\begin{exercise}[subtitle={Notebook}]
+Consider the example of the optimal portfolio selection at the stock market. Follow the instructions in the notebook, compute the relevant statistical quantities and optimize your portfolio.
+\end{exercise}
+
+%\begin{exercise}[subtitle={Paper + Notebook}]
+%Consider the example of the inverted pendulum (Lecture 5, slide 33) where the pendulum state is described by the vector
+%\begin{equation}
+%\vec x_t = [\theta_t,p_t]
+%\end{equation}
+%The acceleration of the angular acceleration $\ddot{\theta}$ and the cart acceleration $\ddot{p}$ pendulum are given by:
+%\begin{align}
+%  \ddot \theta_t & = \frac{(c+m)g\sin(\theta_t)-ml\sin(\theta_t)\cos(\theta_t)\dot\theta_t^2-\cos(\theta_t) u_t}{l(c+m\sin^2(\theta_t))}\label{eq:theta} \\
+%  \ddot p_t &=\frac{-mg\sin(\theta_t)\cos(\theta_t)+ml\sin(\theta_t)\dot\theta_t^2+u_t}{c+m\sin^2(\theta_t)}\label{eq:p}
+%\end{align}
+%Given the state $\vec{x}_t$, the state at time $t+1$ can be approximated using the Verlet method by:
+%\begin{align}
+%\vec x_{t+1} = 2 \vec x_t - \vec{x_{t-1}} + \ddot{\vec x}_t \frac{\Delta t^2}{2} \label{eq:verlet}
+%\end{align}
+%
+%\begin{enumerate}[label=\emph{\alph*)}]
+%\item \textit{Paper:} Insert equations (\ref{eq:theta}) and (\ref{eq:p}) into (\ref{eq:verlet}) and bring it into the shape $\vec x_{t+1} = \mat{A}_t \vec x_t + \vec b_t u_t + \vec c_t$
+%\item \textit{Notebook:} Implement the calculation of $\mat{A}_t$,$\vec b_t$ and $\vec c_t$. Simulate the pendulum.
+%\item \textit{Paper:} Consider the time-dependent pendulum states $\vec{x}_t$ extended by the control $u_t$ and stacked into one vector $\tilde{\vec x}_T$: 
+%\begin{align*}
+%\tilde{\vec x}_T = \begin{pmatrix}
+%\theta_1\\
+%p_1\\
+%u_1\\
+%\theta_2\\
+%p_2\\
+%u_2\\
+%\vdots\\
+%u_T
+%\end{pmatrix}
+%\end{align*}
+%We want to solve the following optimization problem for the prediction horizon $T$:
+%\begin{align*}
+%&\min_{\tilde{\vec{x}_T}} \tilde{\vec x}_T^\top \mat Q \tilde{\vec{x}_T}\\
+%\text{subject to} \quad & \tilde{\mat A}\tilde{\vec x}_T = \tilde{\vec b}
+%\end{align*}
+%Write down the structure of the matrices $\tilde{\mat A}$ and $\mat Q$ and the vector $\tilde{\vec b}$ using $A_t$, $b_t$ and $c_t$. Which sizes do they have and what entries do they contain?
+%\item \textit{Notebook:} Implement the model predictive control algorithm.
+%\end{enumerate}
+%\end{exercise}
+
+
+\begin{exercise}[subtitle={Paper + Notebook}]
+Consider the example of the inverted pendulum where the pendulum state is described by the vector
+\begin{equation}
+\vec x_t = [\theta_t,p_t].%,\dot{\theta}_t,\dot{p}_t].
+\end{equation}
+The acceleration of the angular acceleration $\ddot{\theta}$ and the cart acceleration $\ddot{p}$ pendulum are given by:
+\begin{align}
+  \ddot \theta_t & = \frac{(c+m)g\sin(\theta_t)-ml\sin(\theta_t)\cos(\theta_t)\dot\theta_t^2-\cos(\theta_t) u_t}{l(c+m\sin^2(\theta_t))}\label{eq:theta} \\
+  \ddot p_t &=\frac{-mg\sin(\theta_t)\cos(\theta_t)+ml\sin(\theta_t)\dot\theta_t^2+u_t}{c+m\sin^2(\theta_t)}\label{eq:p}
+\end{align}
+Given the state $\vec{x}_t$, the state at time $t+1$ can be approximated by:
+\begin{equation}
+\label{eq:verlet}
+\begin{aligned}
+\vec x_{t+1} &= \vec x_t + \dot{\vec{x}}_{t} \Delta t + \ddot{\vec x}_t \frac{\Delta t^2}{2} \\
+\dot {\vec x}_{t+1} &= \dot{\vec x}_t + \ddot{\vec{x}}_{t} \Delta t
+\end{aligned}
+\end{equation}
+For this consider the extended state $\vec z_t = \begin{pmatrix} \vec x_t\\ \dot{\vec x}_t\end{pmatrix}$.
+
+\begin{enumerate}[label=\emph{\alph*)}]
+\item \textit{Paper:} Insert equations (\ref{eq:theta}) and (\ref{eq:p}) into (\ref{eq:verlet}) and bring it into the shape $\vec z_{t+1} = \mat{A}_t \vec z_t + \vec b_t u_t + \vec c_t$
+\item \textit{Notebook:} Implement the calculation of $\mat{A}_t$,$\vec b_t$ and $\vec c_t$. Simulate the pendulum.
+\item \textit{Paper:} To convert the problem to an optimization problem, the time-dependent pendulum states $\vec{x}_t$ are extended by the control $u_t$ and stacked into one vector $\tilde{\vec x}_T$: 
+\begin{align*}
+\tilde{\vec x}_T = \begin{pmatrix}
+\theta_1\\
+p_1\\
+\dot{\theta_1}\\
+\dot{p_1}\\
+u_1\\
+\theta_2\\
+p_2\\
+\vdots\\
+\dot{\theta_T}\\
+\dot{p_T}\\
+u_T
+\end{pmatrix}
+\end{align*}
+We want to solve the following optimization problem for the prediction horizon $T$:
+\begin{align*}
+&\min_{\tilde{\vec{x}_T}} \tilde{\vec x}_T^\top \mat Q \tilde{\vec{x}_T}\\
+\text{subject to} \quad & \tilde{\mat A}\tilde{\vec x}_T = \tilde{\vec b}
+\end{align*}
+Write down the structure of the matrix $\tilde{\mat A}$ and the vector $\tilde{\vec b}$ using $\mat A_t$, $\vec b_t$ and $\vec c_t$.
+\item \textit{Notebook:} Implement the model predictive control algorithm.
+\end{enumerate}
+\end{exercise}
+
+
+\begin{solution}[print=false]
+
+\begin{align*}
+\vec x_{t+1} = A_t \vec x_t + \vec b_t  u_t + \vec c_t\\
+\mat A_t = \begin{pmatrix}
+1 & 0 & \Delta t & 0\\
+0 & 1 & 0  & \Delta t\\
+0 & 0 & 1  & 0\\
+0 & 0 & 0  & 1
+\end{pmatrix}\\
+\vec b_t = \begin{pmatrix}
+\Delta t \frac{-\cos(\theta_t)}{l(c+m \sin^2(\theta_t))} \frac{\Delta t}{2}\\
+\frac{\Delta t} {(c+m \sin^2(\theta_t))} \frac{\Delta t}{2}\\
+\Delta t \frac{-\cos(\theta_t)}{l(c+m \sin^2(\theta_t))}\\
+\frac{\Delta t} {(c+m \sin^2(\theta_t))}
+\end{pmatrix}\\
+\vec{c}_t = 
+\begin{pmatrix}
+\Delta t \frac{(c+m) g \sin(\theta_t)-m l \sin(\theta_t) \cos(\theta_t) \dot{\theta}_t^2}{l (c+m*sin^2(\theta))} \frac{\Delta t}{2}\\
+\Delta t \frac{-m g \sin(\theta_t) \cos(\theta_t)+m l \sin(\theta_t) \dot{\theta}_t^2}{c+m \sin^2(\theta_t)} \frac{\Delta t}{2}\\
+\Delta t \frac{(c+m) g \sin(\theta_t)-m l \sin(\theta_t) \cos(\theta_t) \dot{\theta}_t^2}{l (c+m*sin^2(\theta))}\\
+\Delta t \frac{-m g \sin(\theta_t) \cos(\theta_t)+m l \sin(\theta_t) \dot{\theta}_t^2}{c+m \sin^2(\theta_t)}
+\end{pmatrix}
+\end{align*}
+Different formulation when considering the $\dot{\theta}_t^2$ in $\vec{c}_t$ as being linear in $\dot{\theta}_t$:
+\begin{align*}
+\mat A_t = \begin{pmatrix}
+1 & 0 & \Delta t + \frac{\Delta t}{2} \frac{- \Delta t (m l \sin(\theta_t) \cos(\theta_t) \dot{\theta}_t)}{l (c+m \sin^2(\theta_t))} & 0\\
+0 & 1 & \Delta t \frac{m l \sin(\theta_t) \dot{\theta}_t}{c+m \sin^2(\theta_t)} \frac{\Delta t}{2} & \Delta t\\
+0 & 0 & 1 + \frac{- \Delta t (m l \sin(\theta_t) \cos(\theta_z) \dot{\theta_t})}{l (c+m \sin^2(\theta_t))}  & 0\\
+0 & 0 & \frac{- \Delta t (m l \sin(\theta_t) \cos(\theta_t) \dot{\theta_t})}{l (c+m \sin^2(\theta_t))}  & 1
+\end{pmatrix}\\
+\vec b_t = \begin{pmatrix}
+\Delta t \frac{-\cos(\theta_t)}{l(c+m \sin^2(\theta_t))} \frac{\Delta t}{2}\\
+\frac{\Delta t} {(c+m \sin^2(\theta_t))} \frac{\Delta t}{2}\\
+\Delta t \frac{-\cos(\theta_t)}{l(c+m \sin^2(\theta_t))}\\
+\frac{\Delta t} {(c+m \sin^2(\theta_t))}
+\end{pmatrix}\\
+\vec{c}_t = 
+\begin{pmatrix}
+\Delta t \frac{(c+m) g \sin(\theta_t)}{l (c+m \sin^2(\theta_t))} \frac{\Delta t}{2}\\
+\Delta t \frac{-m g \sin(\theta_t) \cos(\theta_t)}{c+m \sin^2(\theta_t)} \frac{\Delta t}{2}\\
+\Delta t \frac{(c+m) g \sin(\theta_t)}{l (c+m \sin^2(\theta_t))}\\
+\Delta t \frac{-m g \sin(\theta_t) \cos(\theta_t)}{c+m \sin^2(\theta_t)}
+\end{pmatrix}
+\end{align*}
+\end{solution}
+
+\end{document}

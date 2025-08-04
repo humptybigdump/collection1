@@ -1,0 +1,197 @@
+\input{../exercise_preamble.tex}
+\usepackage{color} 
+
+\begin{document}
+
+\author{}
+\date{}
+\title{Optimization Methods for \\Machine Learning and Engineering\\\vspace{0.5cm}\textit{Exercise 1}}
+\maketitle
+
+%\printallsolutions*[]
+
+\setcounter{section}{1}
+\setcounter{exercise}{0}
+
+
+% =================== Derivatives ======================
+
+\begin{exercise}[ID=one,subtitle={Paper + Jupyter Notebook}]
+\begin{enumerate}[label=\emph{\alph*)}]
+\item Write down the first derivative of the following function with respect to $x$:
+\begin{equation*}
+f(x) = \mathrm{ln}(3x^3 + 2)\cdot x + 2 x^5 + 5 e^{-x^2} + \mathrm{sin}(2x)
+\end{equation*}
+\item Verify your solution by implementing the difference quotient in Julia.
+\end{enumerate}
+\end{exercise}
+
+\begin{solution}[print=true]
+\begin{eqnarray*}
+f'(x) &=& 10 x^4+\frac{9x^3}{3x^3 + 2} - 10xe^{-x^2} + \mathrm{ln}(3x^3+2)+2\mathrm{cos}(2x)\\
+%f''(x) &=& −\frac{81x^5}{(3x^3+2)^2}+40x^3+20x^2e^{−x^2}+\frac{36x^2}{3x^3+2}−4\mathrm{sin}(2x)−10e^{−x^2}
+\end{eqnarray*}
+\end{solution}
+
+% =================== Gradient  +  Hessian ======================
+
+\begin{exercise}[subtitle={Paper + Jupyter Notebook}]
+  Let $g$ be a function depending on the variables $x_1$ and $x_2$:
+\begin{equation}
+g(x_1,x_2) =  6 x_1^3 + \mathrm{sin}(2x_2)
+\end{equation}
+\begin{enumerate}[label=\emph{\alph*)}]
+\item Find the gradient $\grad{g(x_1,x_2)}$ defined as:
+\begin{eqnarray}
+\grad{g(x_1,x_2)} = \begin{pmatrix} \frac{\partial g(x_1,x_2)}{\partial x_1} \\ \frac{\partial g(x_1,x_2)}{\partial x_2}  \end{pmatrix}
+\end{eqnarray}
+\item Find the Hessian $\hess{g}(x_1,x_2)$ defined as:
+\begin{equation}
+\hess{g}(x_1,x_2) = \begin{pmatrix} \frac{\partial\partial g(x_1,x_2)}{\partial x_1 \partial x_1} &  \frac{\partial\partial g(x_1,x_2)}{\partial x_1 \partial x_2} \\
+\frac{\partial \partial g(x_1,x_2)}{\partial x_2 \partial x_1}  & \frac{\partial\partial g(x_1,x_2)}{\partial x_2 \partial x_2}
+\end{pmatrix}
+\end{equation}
+\item Verify your solution by using the difference quotient implemented in Julia from Exercise 1.1b.
+\end{enumerate}
+\end{exercise}
+
+
+\begin{solution}[print=true]
+\begin{enumerate}[label=\emph{\alph*)}]
+\item \begin{eqnarray*}
+\frac{\partial g(x_1,x_2)}{\partial x_1} &=& 18\,x_1^2\\
+\frac{\partial g(x_1,x_2)}{\partial x_2} &=& 2\,\mathrm{cos}(2x_2)
+\end{eqnarray*}
+\item \begin{align*}
+\hess{g}(x_1,x_2) = \begin{pmatrix}
+36\,x_1 & 0\\
+0 & -4\,\mathrm{sin}(2x_2)
+\end{pmatrix}
+\end{align*}
+\end{enumerate}
+
+\end{solution}
+
+%============================== Convexity =====================================
+
+\begin{exercise}[subtitle={Paper}]
+  Identify the following expressions as convex or concave by applying Jensen's inequality or by evaluating (if possible) the second derivative/Hessian.
+  \begin{enumerate}[label=\emph{\alph*)}]
+  \item $f(x) = x^2$
+%  \item %\begin{align*}
+%  $I_C(x) = \begin{cases}
+%  0\quad x\in C\\
+%  \infty \quad x\not\in C 
+%  \end{cases}$
+% % \end{align*} 
+% for a convex set $C$
+  \item $f(x) = e^{ax}$ for $x\in \mathbb{R}$ and $a \in \mathbb{R}$
+  \item $f(x) = x^a$ for $x, a\in \mathbb{R}, x> 0$
+%  \item $f(x) = |x|^p$, for $p\geq 1$ for $x,p\in \mathbb{R}$
+  \item $f(x) = \log(x)$ for $x\in \mathbb{R}, x>0$
+  \item $f(x) = x \log(x)$ with $x\in \mathbb{R}, x> 0$
+  \item $f(\vec{x}) = \max\{x_1, \dots , x_n\}$ for $\vec{x}\in \mathbb{R}^n$
+%  \item Geometric mean: $f(\vec{x}) = (\prod^n_{i=1} x_i)^{1/n}$ for $\vec{x}\in \mathbb{R}^n$ and $\vec{x} > 0$
+  \end{enumerate}
+\end{exercise}
+
+\begin{solution}[print=true]
+
+%\textbf{Clarify the following mathematical expressions:}
+%\begin{itemize}
+%\item $\mathrm{dom}f$
+%\item $\mathrm{img}f$
+%\end{itemize}
+\textbf{First order condition for convexity:}\\
+Suppose $f$ is differentiable (i.e., its gradient $\nabla f$ exists at each point in $\mathrm{dom} f$,
+which is open). Then $f$ is convex iff $\mathrm{dom} f$ is convex and
+\begin{equation}
+f(y) \geq f(x) + \nabla f(x)^\top (y-x)
+\end{equation}
+\\
+\textbf{Second order condition for convexity:}\\
+Assume that $f$ is twice differentiable, i.e. its Hessian $H$ or second derivative $\nabla^2 f$ exists at each point in $\mathrm{dom}f$, which is open. Then $f$ is convex iff $\mathrm{dom}f$ is convex and its Hessian is positive semidefinite:
+\begin{align*}
+\forall x\in \mathrm{dom} f: \quad\nabla^2 f \geq 0
+\end{align*}
+For a function with $\mathrm{dom}f \subseteq\mathbb{R}$, this reduces to the simple condition $f^{\prime\prime}(x) \geq 0$. The condition $\nabla^2 f \geq 0$ can be interpreted geometrically as the requirement that the
+graph of the function have positive (upward) curvature at $x$.
+  \begin{enumerate}[label=\emph{\alph*)}]
+  \item $x^2$ is \textcolor{blue}{convex}
+%  \item The \blue{convex} function $I_C$ is called the \textit{indicator function} of the set $C$.
+%We can play several notational tricks with the indicator function $I_C$. For example
+%the problem of minimizing a function f (defined on all of Rn, say) on the set C is the
+%same as minimizing the function $f + I_C$ over all of Rn. Indeed, the function $f + I_C$
+%is (by our convention) $f$ restricted to the set $C$.
+\item $f(x) = e^{ax}$ for $x\in \mathbb{R}$ and $a \in \mathbb{R}$ is \textcolor{blue}{convex}
+\item $f(x) = x^a$ for $x, a\in \mathbb{R}, x> 0$ is \textcolor{blue}{convex} if $a\geq 1$ or $a\leq 0$ and \textcolor{blue}{concave} for $0 \leq a \leq 1$
+%\item $|x|^p$, for $p\geq 1$ for $x,p\in \mathbb{R}$ is \blue{convex}
+\item $\ln(x)$ for $x\in \mathbb{R}, x>0$ is \textcolor{blue}{concave}
+\item Negative entropy: $f(x) = x \ln(x)$ with $x\in \mathbb{R}, x> 0$ is \textcolor{blue}{convex}
+\item Max function $f(\vec{x}) = \max\{x_1, \dots , x_n\}$ for $\vec{x}\in \mathbb{R}^n$ is \textcolor{blue}{convex}
+%\item Geometric mean: $f(\vec{x}) = (\prod^n_{i=1} x_i)^{1/n}$ for $\vec{x}\in \mathbb{R}^n$ and $\vec{x} > 0$ is \blue{concave}
+%Norms. Every norm on Rn is convex.
+%• Quadratic-over-linear function. The function f(x, y) = x2/y, with
+%dom f = R × R++ = {(x, y) ∈ R2 | y > 0},
+%is convex (figure 3.3).
+%• Log-sum-exp.
+%The function f(x) = log (ex1 + · · · + exn) is convex on Rn.
+%This function can be interpreted as a differentiable (in fact, analytic) approx-
+%imation of the max function, since
+%max{x1, . . . , xn} ≤ f(x) ≤ max{x1, . . . , xn} + log n
+%for all x. (The second inequality is tight when all components of x are equal.)
+%Figure 3.4 shows f for n = 2.
+%• Log-determinant. The function f(X) = log det X is concave on dom f = Sn ++.
+\end{enumerate}
+\end{solution}
+
+\begin{exercise}[subtitle={Paper}]
+Prove that the sum of two convex functions $f$ and $g$ is convex.
+\end{exercise}
+
+\begin{solution}[print=true]
+\begin{align}
+(f+g)( \alpha x_1+(1-\alpha )x_2)
+=  & \;  f( \alpha x_1+(1-\alpha )x_2) + g( \alpha x_1+(1-\alpha )x_2) \notag \\
+\le  & \; \alpha f(x_1) + (1-\alpha )f(x_2) + \alpha g(x_1) + (1-\alpha )g(x_2) \notag \\
+= & \; \alpha (f(x_1)+g(x_1)) + (1-\alpha)(f(x_2)+g(x_2))  \notag \\
+= & \;  \alpha (f+g)(x_1) + (1- \alpha ) (f+g)(x_2) \notag
+\end{align} 
+For all $ \alpha \in (0,1) $ and $ x_1 , x_2 \in D $ , $f$ and $g$ defined on $D$.\\
+\\
+Composition rules of convex/concave functions:\\
+
+$f(g_1(x), g_2(x), . . . )$ is convex if f is convex and for
+all arguments $i$ either
+\begin{itemize}
+\item $f$ increases in argument $i$ and $g_i$ is convex
+\item $f$ decreases in argument $i$ and $g_i$ is concave
+\item $g_i$ is linear
+\end{itemize}
+
+\end{solution}
+
+
+%\begin{exercise}[subtitle={Paper}]
+%Let $f$ be the function:
+%\begin{equation}
+%q(x,y) = (x-y)^2+x^2
+%\end{equation}
+%Compute the gradient at $a=(-20,20)$. What is the step size at this point according to the backtracking line search algorithm with the initial parameter $\alpha= 1.0$ and fixed $\beta= 10^{-4}$?
+%\end{exercise}
+
+%\begin{solution}[print=true]
+%\begin{equation}
+%\nabla q(x,y) = \begin{pmatrix}
+%2(x-y)+2x \\ -2(x-y)
+%\end{pmatrix}
+%\end{equation}
+%\begin{equation}
+%\nabla q(-20,20) = \begin{pmatrix}
+%-120 \\ 80
+%\end{pmatrix}
+%\end{equation}
+%Line Search: 0.25
+%\end{solution}
+
+\end{document}

@@ -1,0 +1,29 @@
+% Anhang für Studien-und Diplomarbeiten am ETI.
+%--------------------------------------------------------------------
+%
+%   Version: 3.25        (Koma-Skript, documentclass{scrbook})
+%   Datum: 01.06.2018
+%   Autor: Johannes Bier
+%
+%--------------------------------------------------------------------
+
+\begin{spacing}{1}                              % Zeilenabstand auf 1-fach zurückgesetzt
+\appendix
+\renewcommand*{\chapterpagestyle}{scrheadings}  % mit KOMA-Skript: Kapitelanfangsseiten mit Seitenzahl
+
+   % \chapter{Schaltpläne}                       % Schaltpläne hier mit \includegraphics einfügen
+
+
+
+% folgende Verzeichnisse werden automatisch erstellt:
+
+    \listoffigures                              % Abbildungsverzeichnis
+        \clearpage
+    \listoftables                               % Tabellenverzeichnis
+        \clearpage
+    %\lstlistoflistings							% Quellcodeverzeichnis
+
+    \printbibliography
+
+\appendix
+\end{spacing} 

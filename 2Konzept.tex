@@ -1,0 +1,168 @@
+\chapter{Übung 0}
+\setcounter{page}{1}
+
+\section{Fragestellung}
+In dieser Übung wird die Rückstands- und die Produktzusammensetzung einer absatzweisen Destillation eines Dreikomponentengemisches berechnet. In Abbildung \ref{fig:Trennstufe} ist die Trennstufe schematisch dargestellt.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.7]{img/Trennstufe_cropped.pdf}
+         \caption{Trennstufe}
+    \label{fig:Trennstufe}
+\end{figure}
+
+\noindent Der Verlauf der Destillation wird über das Verhältnis der Anfangsstoffmenge zur aktuellen Stoffmenge dargestellt:
+
+\begin{equation}
+ \frac{N_{\text{L}}}{N_{\text{L,0}}}   
+\end{equation}
+
+\noindent Die Ausgangszusammensetzung sowie die Trennfaktoren sind in Tabelle \ref{tab:Vorgaben} angegeben.
+
+\begin{table}[h]
+    \centering
+    \caption{Anfangszusammensetzung und Trennfaktoren} 
+    \begin{tabular}{l| c}
+      $ \tilde x_{1,0}$ & 0,2 \\ \hline
+      $ \tilde x_{2,0}$ & 0,55 \\ \hline
+      $ \tilde x_{3,0}$ & 0,25 \\ \hline
+      $ \omega_{2,1}$ & 0,4 \\ \hline
+      $ \omega_{3,1}$ & 0,2 
+        \end{tabular}
+    \label{tab:Vorgaben}
+\end{table}
+
+
+\section{Bilanzen}
+\label{ch:Bilanz}
+In diesem Kapitel werden die Berechnungsvorschriften für die verschiedenen Zusammensetzungen hergeleitet.
+
+\subsection{Rückstandszusammensetzung}
+
+Zur Berechnung der Rückstandszusammensetzung wird eine Gesamtbilanz und pro Komponente eine Komponentenbilanz erstellt. Als Bilanzraum wird dabei die Trennstufe gewählt. Durch Einführung des Trennfaktors $\omega_{\text{ij}} = \frac{\tilde y_{\test{j}}}{\tilde x_{\test{j}}} \cdot \Big( \frac{\tilde y_{\test{i}}}{\tilde x_{\test{i}}} \Big) ^{-1}$ und Lösung des Gleichungssystem werden die nachfolgenden Gleichung bestimmt.
+
+\noindent Die Berechnung der Rückstandszusammensetzung $\tilde x_1$ erfolgt mit Gleichung \ref{eq:Kompo_1}.
+
+\begin{equation}
+    1 = \tilde x_{\text{1}} + \tilde x_{\text{2}} \cdot \Big( \frac{\tilde x_{\text{1}}}{\tilde x_{\text{1,0}}} \Big) ^{\omega_{\text{21}}} \cdot \Big( \frac{N^{\text{L}}}{N_{0}^{\text{L}}} \Big) ^{\omega_{\text{21 -1}}} + \tilde x_{\text{3}} \cdot \Big( \frac{\tilde x_{\text{1}}}{\tilde x_{\text{1,0}}} \Big) ^{\omega_{\text{31}}} \cdot \Big( \frac{N^{\text{L}}}{N_{0}^{\text{L}}} \Big) ^{\omega_{\text{31 -1}}}
+    \label{eq:Kompo_1}
+\end{equation}
+
+\noindent Gleichung \ref{eq:Kompo_1} kann analytisch nicht gelöst werden. Die nummerische Lösung ist in Abschnitt \ref{sec:Pyth} dargestellt.
+
+\noindent Die Rückstandszusammensetzung von Komponente 2 und 3 kann explizit über Gleichung~\ref{eq_Kompo_23} berechnet werden.
+
+\begin{equation}
+    \tilde x_{\text{i}}^{\text{L}} = \tilde x_{\text{i,0}} \cdot \Big( \frac{\tilde x_{\text{1}}}{\tilde x_{\text{1,0}}} \Big) ^{\omega_{\text{i1}}} \cdot \Big( \frac{N^{\text{L}}}{N_{0}^{\text{L}}} \Big) ^{\omega_{\text{i1 -1}}}
+    \label{eq_Kompo_23}
+\end{equation}
+
+\subsection{Fraktioniertes Produkt}
+Die Berechnung der Zusammensetzung des fraktionierten Produktes erfolgt über die Trennfaktoren und die Zusammensetzung des Rückstandes. Aus der Definition des Trennfaktors folgt Gleichung \ref{eq:Trenn}.
+
+\begin{equation}
+    \tilde y_{\text{j}} = \tilde y_{\text{p}} \cdot \omega_{\text{jp}} \cdot \frac{\tilde x_{\text{j}}}{\tilde x_{\text{p}}}
+    \label{eq:Trenn}
+\end{equation}
+
+\noindent Mit der Summationsgleichung (Summe aller Molanteile = 1) und Gleichung \ref{eq:Trenn}, kann der Molanteil der Komponente 1 im Produktstrom nach Gleichung \ref{eq:Produkt} berechnet werden.
+
+\begin{equation}
+    \tilde y_1 = \Big( 1 + \omega_{21} \cdot \frac{\tilde x_{2}}{\tilde x_1}  + \omega_{31} \cdot \frac{\tilde x_{3}}{\tilde x_1} \Big) ^{-1}
+    \label{eq:Produkt}
+\end{equation}
+
+\noindent Die Molanteile von Komponente 2 und 3 werden über Gleichung \ref{eq:Trenn} berechnet.
+
+
+\subsection{Kumuliertes Produkt}
+
+Für die Berechnung der kumulierten Produktzusammensetzung wird eine Gesamt- und eine Komponentenbilanz aufgestellt. Dabei wird als Bilanzraum die Blase und das kondensierte Destillat gewählt. Durch einsetzten der Gesamtbilanz in die Komponentenbilanz ergibt sich Gleichung \ref{eq:kum_Prod}. Mit dieser wir die kumulierte Produktzusammensetzung berechnet werden kann.
+
+\begin{equation}
+    \overline{\tilde x_{\text{i,D}}} = \frac{1}{1 - \frac{N^{\text{L}}}{N^{\text{L}}_0}} \cdot \tilde x_{\text{i,0}} - \frac{\frac{N^{\text{L}}}{N^{\text{L}}_0}}{1 - \frac{N^{\text{L}}}{N^{\text{L}}_0}} \cdot \tilde x_{\text{i}}
+    \label{eq:kum_Prod}
+\end{equation}
+
+
+\section{Numerische Umsetzung mit Python}
+\label{sec:Pyth}
+
+Zur Berechnung der Zusammensetzungen und Erstellung der Diagramme, wurde ein Programm in Python erstellt. Im folgenden Kapitel wird kurz auf die Struktur des Programmes, sowie auf einzelnen Funktionen eingegangen.
+In Abbildung \ref{fig:Klassen} ist eine Übersicht der einzelnen Klassen dargestellt. Dabei sind die Klassen \textit{ResidueComposition,  ProductComposition} \textit{ProductCompositionCumulated} für die Berechnung der Molanteile nach den Gleichungen aus Kapitel \ref{ch:Bilanz} zuständig. Die Klasse \textit{MatrixBuilder} erstellt jeweils die Matrizen in welchen die jeweiligen Molanteile und der dazugehörige Wert von $\frac{N^{\text{L}}}{N_{0}^{\text{L}}}$ abgespeichert werden. Die Klassen \textit{Diagram} und \textit{TernaryDiagram} sind für die Erzeugung der Diagramme und der Dreiecksdiagramm zuständig.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.8]{img/Uebersicht_Klassen.PNG}
+         \caption{Klassenübersicht}
+    \label{fig:Klassen}
+\end{figure}
+
+\clearpage
+
+\noindent Als Eingabeparameter benötigt das Programm die Ausgangszusammensetzung, die Trennfaktoren sowie die Schrittweite für die numerische Berechnung.
+
+\noindent Die numerische Lösung von Gleichung \ref{eq:Kompo_1} erfolgt mit dem Newton Verfahren. Dafür wird die Funktion \textit{optimize.newton} aus der Bibliothek \textit{SciPy} genutzt. Die Implementierung ist in Abbildung \ref{fig:Newton} dargestellt. Als Startwert für das Newton Verfahren wird der Wert des vorherigen Schrittes gewählt. Für die Toleranz wird ein fester Wert von 1E-7 gewählt.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.7]{img/newton.PNG}
+         \caption{Implementierung optimize.newton}
+    \label{fig:Newton}
+\end{figure}
+
+
+
+\clearpage
+
+\section{Ergebnisse}
+In diesem Kapitel sind alle Ergebnisdiagramme dargestellt. Für die Berechnung wurde eine Schrittweite von 0.01 gewählt.  
+
+\subsection{Rückstandszusammensetzung}
+
+\begin{figure}[h]
+    \centering
+    \includesvg[scale=0.63]{img/Rueck_Dia}
+        \caption{Diagramm Rückstandszusammensetzung}
+    \label{fig:Trennstufe}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includesvg[scale=0.63]{img/Rueck_Dreieck}
+        \caption{Dreiecksdiagramm Rückstandszusammensetzung}
+    \label{fig:Trennstufe}
+\end{figure}
+
+\subsection{Produktzusammensetzung}
+
+\begin{figure}[H]
+    \centering
+    \includesvg[scale=0.63]{img/Prod_Dia}
+        \caption{Diagramm Produktzusammensetzung}
+    \label{fig:Trennstufe}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includesvg[scale=0.63]{img/Prod_Dreieck}
+        \caption{Dreiecksdiagramm Produktzusammensetzung}
+    \label{fig:Trennstufe}
+\end{figure}
+
+
+\subsection{Kumulierte Produktzusammensetzung}
+
+\begin{figure}[H]
+    \centering
+    \includesvg[scale=0.63]{img/kum_Prod_Dia}
+        \caption{Diagramm kumulierte Produktzusammensetzung}
+    \label{fig:Trennstufe}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includesvg[scale=0.63]{img/kum_Prod_Dreieck}
+        \caption{Dreiecksdiagramm kumulierte Produktzusammensetzung}
+    \label{fig:Trennstufe}
+\end{figure}

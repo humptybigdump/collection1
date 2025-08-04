@@ -1,0 +1,70 @@
+\documentclass[oneside,a4paper,12pt,table]{report} %Gibt an: Papierformat, Schriftgröße (war scrreprt)
+
+% Tabellen und Abbildungen sind damit nicht abhängig von der Kapitelnummer
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
+% Schriftgröße der Überschriften
+\newcommand{\chapfnt}{\fontsize{16}{16}}
+\newcommand{\secfnt}{\fontsize{14}{14}}
+\newcommand{\ssecfnt}{\fontsize{12}{12}}
+
+% Schriftformatierung der Überschriften
+\usepackage{titlesec}
+\titleformat{\chapter}{\normalfont\chapfnt\bfseries}{\thechapter}{1em}{}
+\titleformat{\section}{\normalfont\secfnt\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\ssecfnt\bfseries}{\thesubsection}{1em}{}
+
+% Lücken links/über/unter Überschriften
+\titlespacing{\chapter}{0pt}{0pt}{10pt}
+\titlespacing{\section}{0pt}{10pt}{10pt}
+\titlespacing{\subsection}{0pt}{10pt}{10pt}
+
+\usepackage[table]{xcolor}
+\usepackage{FormatierungenVorlage}
+
+% Schriftart
+\usepackage{lmodern} 
+%\usepackage[center]{caption}
+\usepackage[nooneline]{caption}
+
+% Zitierstil
+\usepackage[natbibapa,numberedbib,sectionbib]{apacite}
+\bibliographystyle{apacite}
+
+% Kopf- und Fußzeile
+\fancypagestyle{plain} {
+    \fancyhead{}
+    \setlength{\headheight}{45pt}
+    \lhead{\rule[-4mm]{0pt}{0pt} \includegraphics[height=1.1cm]{images/kit_logo_de}}
+    \chead{{\rule[-2mm]{0pt}{0pt}
+        Karlsruher Institut für Technologie\\
+        Lehrveranstaltung - Arbeitstechniken im Maschinenbau
+    }}
+    \rhead{\includegraphics[height=.6cm]{images/ifab_logo}}
+
+    \fancyfoot{}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \cfoot{- \thepage{} -}
+}
+
+\begin{document}
+	
+% Sprache einstellen.
+\setlanguageGerman{}
+\setlength{\parindent}{1cm}
+
+% Hier kommt der ganze Vorspann wie Abkürzungs-, Abbildungs- oder Tabellenverzeichnisse
+\include{sections/preamble}
+
+% Füge hier die Kapitel per Verweis ein. 
+% Der Befehl \include fügt die angegebene tex-Datei an der jeweiligen Stelle ein. 
+% Die eingefügte Datei wird als normaler Teil des Quelltextes mitverarbeitet und ist daher LaTeX-Code (ohne Vorspann und \begin{document}...\end{document}).
+\include{sections/Einleitung}
+\include{sections/Forschungsfrage}
+\include{sections/Erlaeuterung}
+\include{sections/Diskussion}
+\include{sections/Fazit}
+\include{sections/references}
+
+\end{document}

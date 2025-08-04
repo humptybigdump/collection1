@@ -1,0 +1,98 @@
+\input{../exercise_preamble.tex}
+
+\begin{document}
+
+\author{}
+\date{}
+\title{Optimization Methods for \\Machine Learning and Engineering\\\vspace{0.5cm}\textit{Exercise 13}}
+\maketitle
+
+%\printallsolutions*[]
+
+\setcounter{section}{13}
+\setcounter{exercise}{0}
+
+
+\begin{exercise}[subtitle={Paper}]
+Let the \textit{TrainPerceptron}-Algorithm (see lecture 9 slide 4) return the following values:
+\begin{align*}
+\vec{w} = \begin{pmatrix}
+1\\
+2
+\end{pmatrix}\\
+b = -1
+\end{align*}
+Classify the following points:
+\begin{align*}
+\vec{x}_a^\top &= (2,0.5)\\
+\vec{x}_b^\top &= (2,-0.5)\\
+\vec{x}_c^\top &= (-1,0.5)\\
+\end{align*}
+\end{exercise}
+
+\begin{solution}[print=false]
+Decision boundary:
+$x_1 + 2x_2 - 1 = 0$
+\begin{align*}
+2+0.5\cdot 2-1 = 2 \rightarrow \text{class +1}\\
+2-0.5\cdot 2-1 = 0 \rightarrow \text{undecided}\\
+-1+0.5\cdot 2-1 = -1 \rightarrow \text{class -1}\\
+\end{align*}
+\end{solution}
+
+\begin{exercise}[subtitle={Paper}]
+  Are the following functions valid kernel functions for $\vec x, \vec y, \vec z \in \mathbb{R}^n$?
+\begin{enumerate}[label=\emph{\alph*)}]
+% semi-definit + 2 vectors map to real number
+  \item $k(\vec x,\vec y,\vec z) = (\vec x^\top \vec y) \vec z$
+  \item $k(\vec x,\vec y) = k_1(\vec x,\vec y) - k_2(\vec x,\vec y)$ for valid kernels $k_1, k_2$ 
+  \item $k(\vec x,\vec y) = \sum_{i=1}^l \alpha_i k_i(\vec x,\vec y)$ for valid kernels $k_i,\; \forall i \in \{1,2,\dots ,l \}$ and $\alpha_i \geq 0$
+  \end{enumerate}
+\end{exercise}
+
+\begin{solution}[print=false]
+\begin{enumerate}[label=\emph{\alph*)}]
+	\item This is not a valid kernel function, since $k: X\times X \to \mathbb R$ is not respected.
+	\item This is no valid kernel,
+	\item This is a valid kernel, as the Gram Matrix is symmetric and semi-definite.\\
+	\underline{Symmetry}: $\mat K = \mat K^\top$, better:	$k(x,z) =  k(z,x)$
+	\begin{align}
+	k(x,z) &= \sum_{i=1}^N \alpha_i k_i(x, z)\\
+	&= \sum_{i=1}^N \alpha_i k_i(z, x)\\
+	&= k(z,x)
+	\end{align}	
+	\underline{Semi-definiteness}: $x^\top \mat K x \geq 0$
+	\begin{align*}
+	\mat K &= \alpha_i \vec K_1 + \dots + \alpha_m \vec K_m\\
+	K_{i,j} &= k(x_i, x_j)\\
+	&= \sum_{i=1}^{m} \alpha_i k_i(z,\vec x)\\
+	\vec x^\top \mat K \vec x &= \vec x^\top (\alpha_i \vec K_1 + \dots + \alpha_m \vec K_m)\vec x\\
+	&= \alpha_1 \vec x^\top \vec K_1 \vec x + \dots + \alpha_m \vec x^\top \vec K_m \vec x\\
+	&= \sum_{i=1}^{N} \alpha_i \vec x^\top \vec K_i \vec x\\
+	&\geq 0\\
+	\end{align*}
+	As $\alpha_i \geq 0$ and $\vec x^\top K_i \vec x \geq 0$.
+\end{enumerate}
+\end{solution}
+
+
+\begin{exercise}[subtitle={Notebook}]
+	Use the given iris dataset in the notebook and implement the Dual Perceptron algorithm according to the instructions in the lecture.
+\end{exercise}
+
+
+\begin{exercise}[subtitle={Notebook}]
+\begin{enumerate}[label=\emph{\alph*)}]
+  \item Implement the exponential and polynomial kernel methods.
+  \item Implement the optimization problem to be solved in the dual of the hard margin SVM.
+  \item Complete the sample classification function \textit{svm\_classify}, which calculates $\langle \vec w, \vec y \rangle + b$ from the svm results.
+  \end{enumerate}
+   
+\end{exercise}
+
+%\begin{solution}[print=false]
+
+%\end{solution}
+
+
+\end{document}

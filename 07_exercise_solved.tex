@@ -1,0 +1,109 @@
+\input{../exercise_preamble.tex}
+
+
+\begin{document}
+
+\author{}
+\date{}
+\title{Optimization Methods for \\Machine Learning and Engineering\\\vspace{0.5cm}\textit{Exercise 7}}
+\maketitle
+
+%\printallsolutions*[]
+
+\setcounter{section}{7}
+\setcounter{exercise}{0}
+
+
+%\begin{exercise}[subtitle={Paper or Notebook}]
+%Let $\vec A$ be a matrix defined in the following way:
+%\begin{equation*}
+%\vec A = 
+%\begin{pmatrix}
+%1 & 2 & 3\\
+%4 & 5 & 6\\
+%7 & 8 & 9
+%\end{pmatrix}
+%\end{equation*}
+%Can $\vec A$ be inverted? Explain your answer.
+%\end{exercise}
+%
+%\begin{solution}[print=true]
+%\begin{align*}
+%\mathrm{det}(\vec{A}) &= 1\cdot 
+%\begin{vmatrix} 
+%5 & 6\\
+% 8 & 9
+%\end{vmatrix}
+%- \cdot \begin{vmatrix}
+%4 & 6\\
+%7 & 9
+%\end{vmatrix}
+%+ 3\cdot \begin{vmatrix}
+%4 & 5\\
+%7 & 8
+%\end{vmatrix}\\
+% &= -3 + 12 - 9\\
+% & =  0
+%\end{align*}
+%No matrix inversion possible if its determinant equals zero.
+%\end{solution}
+%
+%\begin{exercise}[subtitle={Paper or Notebook}]
+%  What is the rank of matrix $\vec C$?
+%\begin{equation*}
+%\vec C = \begin{pmatrix}
+%1 & -2 & 0 & 4\\
+%3 & 1 & 1 & 0\\
+%-1 & -5 & -1 & 8\\
+%3 & 8 & 2 & -12
+%\end{pmatrix}
+%\end{equation*}  
+%\end{exercise}
+%
+%\begin{solution}[print=true]
+%\begin{equation}
+%\begin{pmatrix}
+%1 & -2 & 0 & 4\\
+%3 & 1 & 1 & 0\\
+%-1 & -5 & -1 & 8\\
+%3 & 8 & 2 & -12
+%\end{pmatrix}
+%\begin{matrix}[c] ~ \\  ~ \\ \xrightarrow{-2R_1+R_2} \\  \xrightarrow{3R_1 -2R_2} \end{matrix}
+%\begin{pmatrix}
+%1 & -2 & 0 & 4\\
+%3 & 1 & 1 & 0\\
+%0 & 0 & 0 & 0\\
+%0 & 0 & 0 & 0
+%\end{pmatrix}
+%\end{equation}
+%\begin{center}
+%rank(C) = 2
+%\end{center}
+%\end{solution}
+
+
+\begin{exercise}[subtitle={Notebook}]
+Implement a method for solving a problem of the form
+\begin{align*}
+\min_{\vec{x}} \quad & f(\vec{x})\\
+\text{subject to} \quad & g(\vec{x}) \leq 0\\
+& \mat{A}\vec{x} - \vec{b} = \vec{0},
+\end{align*}
+using constraint elimination for the equality constraints.
+\end{exercise}
+
+
+\begin{exercise}[subtitle={Paper + Notebook}]
+\begin{center}
+\includegraphics[scale=0.5]{figures/santa-claus.png}
+\end{center}
+
+Santa Claus has three secret places where he produces presents for good children: Antarctica, Alaska and Greenland. He produces 50\% of the needed presents in Antarctica, 30\% in Greenland and 20\% in Alaska. He knows that there are 78 Mio good children in the European Union, 60 Mio in the USA, 40 Mio in Brazil and 0.8 Mio in New Zealand. Since he is concerned about the well being of his reindeers, he would like to minimize the distance he has to travel with a sleigh loaded with presents. The exhaustion of the animals scales linearly with the number of kilometers and presents. Distances where the sleigh is empty are not counted. How many presents does Santa have to transport from each production site to the children in the four regions?
+
+\begin{enumerate}[label=\emph{\alph*)}]
+\item \textit{Paper:} Formulate the optimization problem and bring it into the canonical form.
+\item \textit{Notebook:} Solve the problem using constraint elimination. (\textit{Hint:} Your solution is right if New Zealand is only supplied by the production site in Antarctica.)
+\end{enumerate}
+\end{exercise}
+
+\end{document}

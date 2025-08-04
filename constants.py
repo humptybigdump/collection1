@@ -1,0 +1,4 @@
+HOLDS_KEY_OBS_COMPONENT = "holds_key"
+AGENT_POSITION_OBS_COMPONENT = "agent_position"
+JUST_PICKED_UP_KEY_OBS_COMPONENT = "just_picked_up_key"
+IMAGE_OBS_COMPONENT = "image"

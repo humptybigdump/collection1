@@ -1,0 +1,161 @@
+%Dokumentklasse
+\documentclass[a4paper,12pt,captions=tableheading]{scrreprt}
+\usepackage[left= 2.5cm,right = 2.5cm, bottom = 2.5 cm]{geometry}
+\usepackage{mathptmx}
+%\usepackage{fontspec}
+%\setmainfont{Times New Roman}
+%\usepackage[T1]{fontenc}
+
+
+%\usepackage[onehalfspacing]{setspace}
+% ============= Packages =============
+
+% Dokumentinformationen
+\usepackage[
+	pdftitle={TTV II Übung Nr. 0},
+	pdfsubject={Trennstufenkonzept},
+	pdfauthor={Michel Bartsch},
+	pdfkeywords={TTV II, TVT, Python, Destillation},	
+	%Links nicht einrahmen
+	hidelinks
+]{hyperref}
+
+%#### NEU VON MIR
+\usepackage{url}
+\usepackage[style=numeric,sorting=none,giveninits=true,url=false,doi=false,isbn=false,maxnames=99]{biblatex}
+\addbibresource{thesis.bib}
+\setcounter{biburllcpenalty}{8000}
+
+
+
+
+
+
+% Standard Packages
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{svg}
+
+%-------------------
+%\usepackage[numbers]{natbib}
+%-------------------
+
+\usepackage{graphicx, subfig}
+\graphicspath{{img/}}
+\usepackage{fancyhdr}
+\usepackage{lmodern}
+\usepackage{color}
+\usepackage{pdfpages}
+\usepackage{csquotes}
+%\usepackage[backend=biber, style=chem-angew, articletitle, chaptertitle, subentry, articletitle=true]{biblatex}
+%\addbibresource{lit1.bib}
+\usepackage{subfig}
+\usepackage{setspace}
+\usepackage{tabularx} % neu hinzugefügt für Tabelle
+\usepackage{booktabs} % neu hinzugefügt für Tabelle
+\usepackage[version=4]{mhchem} % Chemische gleichungen
+\usepackage{booktabs}
+\usepackage{float} 
+\usepackage{multicol}
+
+\usepackage{multirow} 
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{ragged2e}
+\usepackage{lscape}
+
+\usepackage{xcolor}
+\usepackage{eurosym}
+
+%Michel
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
+
+
+\usepackage{setspace}
+\onehalfspacing
+
+
+
+\renewcommand*\chapterheadstartvskip{\vspace*{-\topskip}}
+\renewcommand*\chapterheadendvskip{%
+  \vspace*{1\baselineskip plus .1\baselineskip minus .167\baselineskip}}
+
+
+% zusätzliche Schriftzeichen der American Mathematical Society
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+%nicht einrücken nach Absatz
+%\setlength{\parindent}{0pt}
+
+
+% ============= Kopf- und Fußzeile =============
+\pagestyle{fancy}
+%
+\lhead{TTV II Übung 0}
+\chead{}
+\rhead{\thepage}
+%\rhead{\slshape \leftmark}
+
+
+
+
+
+
+
+
+%%
+\lfoot{}
+\cfoot{}
+\rfoot{}
+%%
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ============= Package Einstellungen & Sonstiges ============= 
+%Besondere Trennungen
+\hyphenation{De-zi-mal-tren-nung}
+
+
+% ============= Dokumentbeginn =============
+
+% =========== SI-Einheiten
+\usepackage{siunitx}
+\sisetup{output-decimal-marker = {,}} %Dezimalzeichen "Komma"
+
+\begin{document}
+%Seiten ohne Kopf- und Fußzeile sowie Seitenzahl
+\pagestyle{empty}
+\include{0titel}
+\onehalfspacing
+%\newpage 
+%\thispagestyle{empty}
+%\quad \addtocounter{page}{-1}
+%\newpage
+%Leere Seite nach Titleblatt-um doppeltseitig zu drucken
+%\tableofcontents kein Inhaltsverzeichnis
+%\newpage 
+\thispagestyle{empty}
+%\quad \addtocounter{page}{-1}
+%\newpage
+%Leere Seite nach Inhaltsverzeichnis-doppelseitiger Druck
+
+% Beendet eine Seite und erzwingt auf den nachfolgenden Seiten die Ausgabe aller Gleitobjekte (z.B. Abbildungen), die bislang definiert, aber noch nicht ausgegeben wurden. Dieser Befehl fügt, falls nötig, eine leere Seite ein, sodaß die nächste Seite nach den Gleitobjekten eine ungerade Seitennummer hat. 
+
+
+% pagestyle für gesamtes Dokument aktivieren
+\pagestyle{fancy}
+%\include{1einleitung}
+\include{2Konzept}
+
+
+
+
+%\printbibheading
+%\printbibliography[maxnames=99]
+\end{document}

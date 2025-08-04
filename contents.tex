@@ -1,0 +1,99 @@
+\section{Introduction}
+The introduction should clearly define the phenomenon or event being studied, such as a hurricane, heatwave, or other climate or weather-related events. This should explain why this phenomenon is significant in climate and environmental science, including its potential impacts and relevance. Additionally, the section should outline the objective of using the machine learning model in this analysis, highlighting how it contributes to understanding or predicting the phenomenon.
+
+\newpage
+
+\section{Methods}
+This section should provide a detailed explanation of the methods used in the analysis. Include the following subsections:
+
+\subsection{Machine Learning Model / AI architecture}
+Describe the machine learning model used for the study, such as NeuralGCM or FourCastNet. Include details about the model architecture, pretraining process, and any relevant configurations.
+
+\subsection{Data Acquisition and Preprocessing}
+Explain the sources of the data, such as the ERA5 or CMIP6 datasets, and describe any pre-processing steps performed. This might include data cleaning, normalization, or augmentation steps to prepare the data for analysis.
+
+\subsection{Post-Processing and Index Calculation}
+Discuss how the model outputs are post-processed to derive meaningful indices related to the phenomenon studied. Include mathematical definitions or formulas for the indices, the steps of calculation, and any validation or comparison with observed data.
+
+\newpage
+
+\section{Results}
+Present the results obtained from your analysis. Include visualizations such as maps, time-series plots, or other graphics to showcase model forecasts. Compare the model's predictions with observed data and quantify performance metrics, such as RMSE or correlation coefficients, to evaluate the model's accuracy and reliability.
+
+Interpret your results whenever you can. Highlight good/surprising/expected results.
+
+\newpage
+
+\section{Discussion}
+Interpret the key findings of the results, emphasizing their implications. Discuss the strengths and limitations of the machine learning model used and its suitability for the chosen phenomenon. Suggest potential improvements or areas for future work based on the insights gained from your analysis.
+
+\newpage
+
+\section{Conclusion}
+Summarize the main findings of the analysis and their significance in the context of climate and environmental sciences. Highlight the contributions of the study and propose directions for further research or future practicals.
+
+\newpage
+
+\printbibliography
+\addcontentsline{toc}{section}{References}
+
+\newpage
+
+\section*{\LARGE Appendix (if applicable)}
+\addcontentsline{toc}{section}{Appendix (if applicable)}
+Include additional plots, code snippets or detailed results supporting the analysis.
+
+
+\newpage
+\section*{\LaTeX Examples}
+\addcontentsline{toc}{section}{\LaTeX Examples}
+As a help to get started with this template. To be deleted for submission.\\
+To compile the document, go to your command line and run biblatex main.tex, biber main, biblatex main.tex. This will generate a document called main.pdf.
+
+\subsection*{Citation examples}
+
+NeuralGCM is a recently published hybrid model by Google and collaborators \cite{kochkov2024neural}, which in particular targets AI forecasting of atmospheric variables on weather-relevant timescales (up to two weeks in advance).
+
+FourCastNet is a cutting-edge deep learning weather forecasting model developed by NVIDIA and collaborators \cite{pathak2022fcastnet}. It uses machine learning to predict atmospheric variables such as temperature, wind, and pressure on a global scale, offering a faster and more efficient alternative to traditional numerical weather prediction models.
+
+
+\subsection*{Table example}
+Table~\ref{tab:random} shows a table.
+
+\input{tables/tabel1}
+
+
+
+\subsection*{Figure examples}
+Figures~\ref{fig:NeuralGCM} and ~\ref{fig:fcastnet} represent two png files.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/neuralgcmarchitecture.png}
+    \caption{\textbf{Schematic of the NeuralGCM framework.}}
+    \label{fig:NeuralGCM}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/fourcastnetarchitecture2.png}
+    \caption{\textbf{Schematic of the FourCastNet framework.} From \cite{pathak2022fcastnet} their Figure~2. }
+    \label{fig:fcastnet}
+\end{figure}
+
+
+\subsection*{Math example}
+The formula for the \textbf{Temperature-Humidity Index (THI)} is commonly expressed as:
+\begin{align}
+    THI &= T - \left(0.55 - 0.0055 \cdot RH\right) \cdot \left(T - 14.5\right)
+    \label{eq:HTI}
+\end{align}
+
+where $T$ and $RH$ are air temperature in °C and relative humidity in percentage (\%), respectively.
+
+
+\subsection*{Code block example}
+Here, an example Python script to bind into Latex:
+\lstinputlisting[label=py:leaky, language=Python, caption=Python implementation of a single leaky-integrating neuron.]{code/leaky.py}

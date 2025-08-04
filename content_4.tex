@@ -1,0 +1,62 @@
+\section{Introduction | Einleitung}
+Mandatory. Questions like: What is the topic of this work, what's the broader context (topic of the seminar), why is it relevant?
+
+
+\section{Methods/Algorithms/Derivations | Methoden/Algorithmen/Herleitungen}
+If applicable.
+\subsection{Method 1}
+If applicable.
+
+
+\section{Applications/Examples/Own experiments | Anwendung/Beispiele/Eigene Experimente}
+If applicable.
+\subsection{Application 1}
+If applicable.
+
+
+\section{Summary and conclusion | Zusammenfassung und Fazit}
+Mandatory. Short summary of the most important aspects of the report.
+If possible: What are open challenges?
+
+\newpage
+\section{\LaTeX Examples}
+As a help to get started with this template. To be deleted for submission.
+\subsection{Citation examples}
+\citet{campbell:2017} define the stages of information processing in a nervous system as: "sensory input, integration, and motor output". \\
+The stages of information processing in a nervous system are defined as: "sensory input, integration, and motor output" \citep{campbell:2017}. 
+
+\subsection{Table example}
+\input{tables/random_numbers}
+
+\subsection{Figure examples}
+This is a png file, it gets blurry when you zoom in:
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=.7\textwidth]{figures/leaky_integration.png}
+    \caption{Symbolic representation of a leaky integrating neuron.}
+    \label{fig:leaky_integration}
+\end{figure}
+
+This is an eps file, it is always sharp:\\
+Notice how the formatting option "[htbp]" allows for the figure to be moved around to page \pageref{fig:activation_function}. Hence, it is best to rather write: The eps file in figure \ref{fig:activation_function} always stays sharp.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=.7\textwidth]{figures/activation_functions}
+    \caption{Shapes of a parametrized tanh activation function.}
+    \label{fig:activation_function}
+\end{figure}
+
+\subsection{Math example}
+The state update of the leaky integrating neuron in figure \ref{fig:leaky_integration} can be formulated as:
+\begin{align}
+    x_i(t+1) &= \lambda_i \cdot \left(W_{i,j} \cdot U_j(t)\right) + (1-\lambda_i) \cdot \theta_i(t)
+    \label{eq:leaky_integration}
+\end{align}
+
+\subsection{Code block example}
+From equation \ref{eq:leaky_integration} the neuron model is implemented using numpy \citep{harris:2020}:
+
+\lstinputlisting[label=py:leaky, language=Python, caption=Python implementation of a single leaky-integrating neuron.]{code/leaky.py}
+
+\subsection{Footnote example}
+The implementation is available on github\footnote{https://github.com/schniewmatz/recurrence}.

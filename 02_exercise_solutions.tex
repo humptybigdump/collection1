@@ -1,0 +1,177 @@
+\input{../exercise_preamble.tex}
+
+\begin{document}
+
+\author{}
+\date{}
+\title{Optimization Methods for \\Machine Learning and Engineering\\\vspace{0.5cm}\textit{Exercise 2}}
+\maketitle
+
+%\printallsolutions*[]
+
+\setcounter{section}{2}
+\setcounter{exercise}{0}
+
+
+\begin{exercise}[subtitle={Paper}]
+Let $\vec A$ be a matrix and $\vec{x}$ and $\vec{y}$ be vectors defined in the following way:
+\begin{equation*}
+\vec A = 
+\begin{pmatrix}
+1 & 2 & 3\\
+4 & 5 & 6\\
+7 & 8 & 9
+\end{pmatrix} \qquad \vec{x} = \begin{pmatrix}
+2 \\4\\ 0
+\end{pmatrix}
+\qquad \vec{y} = \begin{pmatrix}
+5 \\ 7 \\ 1
+\end{pmatrix}
+\end{equation*}
+Compute the product $\vec{x}^\top \vec{A}\vec{y}$ where the notation $\vec{x}^\top$ indicates the transpose of the vector $\vec{x}$:
+\begin{equation*}
+\vec{x}^\top = \begin{pmatrix}
+2 & 4 & 0
+\end{pmatrix}
+\end{equation*}
+\end{exercise}
+
+\begin{solution}[print=false]
+\begin{align*}
+\vec{x}^\top\vec{A}\vec{y} = 288
+\end{align*}
+\end{solution}
+
+\begin{exercise}[subtitle={Notebook}]
+  Find the inverse of matrix $\vec B$:
+  \begin{equation*}
+ \vec B =  \begin{pmatrix}
+  3 & 0 & 2\\
+  2 & 0 & -2\\
+  0 & 1 & 1
+    \end{pmatrix}
+  \end{equation*}
+\end{exercise}
+
+%\begin{solution}[print=false]
+%\begin{eqnarray*}
+%&\begin{bmatrix}[ccc|ccc]
+%3 & 0 & 2 & 1 & 0 & 0\\
+%2 & 0 & -2 & 0 & 1 & 0 \\
+%0 & 1 & 1 & 0 & 0 & 1
+%\end{bmatrix}&
+%\begin{matrix} \xrightarrow{R_1+R_2} \\ ~ \\ ~ \end{matrix}
+% \begin{bmatrix}[ccc|ccc]
+%5 & 0 & 0 & 1 & 1 & 0\\
+%2 & 0 & -2 & 0 & 1 & 0 \\
+%0 & 1 & 1 & 0 & 0 & 1
+%\end{bmatrix} 
+%\begin{matrix}[c] \xrightarrow{R_1\cdot \frac{1}{5}} \\ ~ \\ ~ \end{matrix}
+% \begin{bmatrix}[ccc|ccc]
+%1 & 0 & 0 & \frac{1}{5} & \frac{1}{5} & 0\\
+%2 & 0 & -2 & 0 & 1 & 0 \\
+%0 & 1 & 1 & 0 & 0 & 1
+%\end{bmatrix} 
+%\begin{matrix} ~ \\  \xrightarrow{R_2-2R_1} \\ ~ \end{matrix}\\
+%&
+% \begin{bmatrix}[ccc|ccc]
+%1 & 0 & 0 & \frac{1}{5} & \frac{1}{5} & 0\\
+%0 & 0 & -2 & -\frac{2}{5} & \frac{3}{5} & 0 \\
+%0 & 1 & 1 & 0 & 0 & 1
+%\end{bmatrix}&
+%\begin{matrix} ~ \\  \xrightarrow{ = R_3} \\  \xrightarrow{= R_2} \end{matrix}
+% \begin{bmatrix}[ccc|ccc]
+%1 & 0 & 0 & \frac{1}{5} & \frac{1}{5} & 0\\
+%0 & 1 & 1 & 0 & 0 & 1 \\
+%0 & 0 & -2 & -\frac{2}{5} & \frac{3}{5} & 0 \\
+%\end{bmatrix}
+%\begin{matrix} ~ \\  \xrightarrow{+\frac{1}{2}R_3} \\  \xrightarrow{\cdot -\left(\frac{1}{2}\right)} \end{matrix}
+% \begin{bmatrix}[ccc|ccc]
+%1 & 0 & 0 & \frac{1}{5} & \frac{1}{5} & 0\\
+%0 & 1 & 0 & -\frac{1}{5} & \frac{3}{10} & 1 \\
+%0 & 0 & 1 & \frac{1}{5} & -\frac{3}{10} & 0 \\
+%\end{bmatrix}
+%\end{eqnarray*}
+%\end{solution}
+
+
+\begin{exercise}[subtitle={Paper}]
+The second order Taylor expansion of a function $f(\vec{x})$ at the point $\vec{a}$ is defined as:
+%\begin{equation*}
+%\sum_{n = 0}^{\infty} \frac{\mathrm{d}^n}{\mathrm{d}x^n} \frac{f(a)}{n!} (x - a)^n
+%\end{equation*}
+%
+%\begin{enumerate}[label=\emph{\alph*)}]
+%\item Compute the Taylor expansion of the following function at the position $a = 0$ up to the second order ($n = 2$):
+%\begin{eqnarray*}
+%h_1(x) = \mathrm{sin}(2x)
+%\end{eqnarray*}
+%\item For multi-variate functions where $\vec{x}$ is a vector with the components $x_1$ and $x_2$, the gradient and Hessian are used:
+\begin{equation*}
+f(\vec x) \approx f(\vec a) + \grad{f(\vec a)}^\top(\vec x - \vec a) + \frac{1}{2}(\vec x - \vec a)^\top \left[\hess{f}(\vec a)\right](\vec x - \vec a).
+\end{equation*}
+Compute the second order Taylor expansion at the position $\vec a = \begin{pmatrix}
+0\\ 1
+\end{pmatrix}$ for the function
+\begin{eqnarray*}
+f(\vec x) = e^{0.1x_1} + \mathrm{ln}(x_2) \qquad \text{with}\quad \vec x = \begin{pmatrix}
+x_1\\ x_2
+\end{pmatrix}.
+\end{eqnarray*}
+
+%\end{enumerate}
+\end{exercise}
+
+\begin{solution}[print=true]
+
+%\begin{enumerate}[label=\emph{\alph*)}]
+%\item $h_1(x) \approx 2x$
+\begin{align*}
+%\frac{\partial f}{\partial x_1} &= 0.1\, e^{0.1 x_1}\\
+%\frac{\partial f}{\partial x_2} &= \frac{1}{x_2}\\
+\nabla f(\vec x) &= \begin{pmatrix}
+0.1\, e^{0.1 x_1}\\
+\frac{1}{x_2}
+\end{pmatrix}
+\\
+\hess{f}(\vec x) &= \begin{pmatrix}
+0.01\, e^{0.1 x_1} & 0\\
+0 & -x_2^{-2}
+\end{pmatrix}\\
+f(\vec x) &\approx  1 + (\vec x-\vec a)^\top \begin{pmatrix}
+0.1 \\ 1
+\end{pmatrix}
++ \frac{1}{2}(\vec x- \vec a)^\top \begin{pmatrix}
+0.01 & 0\\
+0 & -1
+\end{pmatrix}
+(\vec x-\vec a)\\
+&\approx  0.005 x_1^2 - 0.5 x_2^2 + 0.1 x_1 + 2 x_2 - 0.5
+\end{align*}
+%\end{enumerate}
+\end{solution}
+
+
+%\begin{exercise}[subtitle = {Notebook}]
+%Verify your solutions from above using Julia.
+%\end{exercise}
+
+% =================== Gradient Descent ===================
+
+\begin{exercise}[subtitle = {Notebook}]
+  Implement the backtracking line search algorithm.
+  %The step size should be $0.25$ for the function $q(x,y) = (x-y)^2+x^2$ at $a=(-20,20)$ setting the parameters $\alpha= 1.0$ and $\beta= 10^{-4}$.
+\end{exercise}
+
+\begin{exercise}[subtitle = {Notebook}]
+Implement the gradient descent algorithm.
+%Verify your implementation by calculating the gradient of $q(x,y) = (x-y)^2+x^2$ at $a=(-20,20)$ by hand.
+\end{exercise}
+
+\begin{exercise}[subtitle = {Notebook}]
+Test your implementation at the \textit{marathon training example} treated in lectures 1 and 2. See the Jupyter notebook for more details.
+\end{exercise}
+
+
+
+\end{document}

@@ -1,0 +1,169 @@
+\input{../exercise_preamble.tex}
+
+\begin{document}
+
+\author{}
+\date{}
+\title{Optimization Methods for \\Machine Learning and Engineering\\\vspace{0.5cm}\textit{Exercise 11}}
+\maketitle
+
+%\printallsolutions*[]
+
+\setcounter{section}{11}
+\setcounter{exercise}{0}
+
+
+
+% ======================== Vector Spaces =======================================
+
+\begin{exercise}[subtitle={Paper}]
+  Use the axioms for vector spaces in order to determine if the following sets $X_i$ are vector spaces.
+\begin{enumerate}[label=\emph{\alph*)}]
+ % \item all real valued functions with integral 0 on $[0,1]$.
+  \item $X_1 = \{f: \mathbb{R} \to \mathbb{R}\; |\; \int_0^1 f(x)\, dx = 1 \}$.
+  \item $X_2 = \{f: \mathbb{R} \to \mathbb{R} \; |\; f(x)= \alpha_0 x^0 + \alpha_1 x^1 + \alpha_2 x^2 + \alpha_3 x^3,\alpha_i \in \mathbb{R}, i \in \{0,1,2,3\}  \}$
+%  \item $X = \{\vec x = (\alpha, \beta) | \alpha, \beta \in \mathbb{R} \}$
+%  \item a set $C\subset \mathbb{R}^2$ for which the implication $\vec x\in C \Leftrightarrow \alpha \vec x \in C,\;\forall \alpha \in \mathbb{R}$ holds.
+%\item $ X = [M \cap N]$ with $M$ and $N$ being vector spaces.
+\item $X_3 = \{\vec x \in \mathbb{R}^2 \mid x_1 \geq 0, x_2 \geq 0 \}$
+  \end{enumerate}
+\end{exercise}
+
+\begin{solution}[print = false]
+not a vector space
+\begin{enumerate}
+\item \begin{align*}
+\forall \vec x,\vec y \in \mathbb{R}^2:\quad & \vec z = \vec x + \vec y = \begin{pmatrix}
+x_1 \\ x_2
+\end{pmatrix}
++ \begin{pmatrix}
+y_1 \\ y_2
+\end{pmatrix} = \begin{pmatrix}
+x_1 + y_1 \\ x_1 + y_2
+\end{pmatrix}
+= 
+\begin{pmatrix}
+z_1 \\ z_2
+\end{pmatrix}, z_1 \geq 0, z_2 \geq 0\\
+& \Rightarrow \vec z \in X \Rightarrow \text{fulfilled}
+\end{align*}
+\item \begin{align*}
+\forall \vec x \in \mathbb{R}^2,\; \alpha \in \mathbb{R}: \quad & \vec z = \alpha \vec x = \begin{pmatrix}
+\alpha x_1 \\ \alpha x_2
+\end{pmatrix}  = \begin{pmatrix}
+z_1 \\ z_2
+\end{pmatrix}\\
+&\alpha\text{ might be negative. Hence, }\vec z\text{ is not guaranteed to be positive}\\
+& \Rightarrow \vec z \notin X \Rightarrow \text{not fullfilled}
+\end{align*}
+\item 
+\begin{align*}
+\text{null vector:}\quad & \vec z = \vec 0 = \begin{pmatrix}
+0 \\ 0
+\end{pmatrix} \in X\\
+& \forall \vec{x} \in \mathbb{R}^2:\; \vec{z} + \vec x = \vec x \Rightarrow \text{fulfilled}
+\end{align*}
+\end{enumerate}
+\end{solution}
+
+%\begin{exercise}[subtitle={Paper}]
+%Show that the three vectors $y_1 = 1$, $y_2 = x$ and $y_3 = x^2$ for $x\in \mathbb{R}$ are linearly independent and therefore span the space of second order polynomial functions.
+%\end{exercise}
+
+%\begin{exercise}[subtitle={Paper + Notebook}]
+%Remind yourself of the model-fitting example of the marathon training. We measured the dataset $D = \{(x_1,y_1),(x_2,y_2)\dots (x_n,y_n) \}$ and tried to approximate it by a polynomial function $m_{\vec \theta}(x) = \theta_0 + \theta_1 x + \theta_2 x^2$ by solving the optimization problem
+%\begin{equation}
+%\min_{\vec{\theta}} \sum_{i = 1}^{n}(y_i - m_{\vec \theta}(x_i))^2.
+%\end{equation}
+%In the view of vector spaces we can rephrase this problem as trying to approximate the unknown function $f(x)$ (from which our data was sampled) by the model. We hereby assume $f(x)\in L^2[x_1,x_n]$.
+%%\begin{equation}
+%%\arg \min_{\vec \theta} \innerprod{f(\vec x) - m_{\vec \theta}(\vec x)}{f(\vec x) - m_{\vec \theta}(\vec x)}
+%%\end{equation}
+%
+%\begin{enumerate}[label=\emph{\alph*)}]
+%\item \textit{Paper:} Formulate the problem as a minimum norm problem. \textit{Hint:} Replace the integral in the inner product by the sum over the data points.
+%\item \textit{Notebook:} Solve the problem by projecting $f(x)$ on the space of polynomial functions. You are free to use the functions provided in \textit{vector\_spaces\_library.jl}. Compare your solution to the one we gained in Exercise 3.2 by using descent methods. 
+%\end{enumerate}
+%\end{exercise}
+
+\begin{exercise}[subtitle={Paper + Notebook}]
+Suppose we want to set up a special manufacturing company which will
+operate for only ten months. During the ten months the company is to
+produce one million copies of a single product. We assume that the
+manufacturing facilities have been leased for the ten-month period, but
+workers have not yet been hired. Presumably, employees will be hired and fired during the ten-month period. Our problem is to determine how many workers should be hired or fired in each of the ten months.
+It is assumed that each employee produces one hundred items per
+month. The cost for the workers is proportional to the number of productive
+workers and can be calculated in advance since the number of workers that are needed to produce the desired amount of products is fixed. However, there is an additional cost due to hiring and firing. If
+$u_k$ workers are hired in the $k$-th month (negative $u_k$ corresponds to
+firings), the processing cost can be argued to be $u^2_k$ because, as $u_k$
+increases, people must be paid to stand in line and more nonproductive
+employees must be paid. We would like to minimize the total processing costs under the condition that all workers must be fired within the tenth month. We do not care about the time within the month at which the hiring or firing takes place. 
+Find $u_k$ for $k = 1,2,\dots ,10$.
+
+\begin{enumerate}[label=\emph{\alph*)}]
+\item \textit{Paper:} Formulate the optimization problem as a minimum norm problem.
+\item \textit{Notebook:} Solve the optimization problem by applying the projection theorem. \textit{Hint:} You might want to look again at lecture 7, slide 15. 
+\end{enumerate}
+\end{exercise}
+
+%\begin{solution}[print=true]
+%\begin{align}
+%\vec u &= \begin{pmatrix}
+%u_1\\u_2\\\vdots \\ u_{10}
+%\end{pmatrix}
+%\\
+%\min_{\vec{u}} &\| \vec{u} \| \\
+%\text{subject to}\quad \innerprod{\vec{b}_1}{\vec{u}} &= 0\\
+%\innerprod{\vec{b}_2}{\vec{u}} &= \frac{10^6}{100}\\
+%\vec{b}_1 &= \vec{1}\\
+%\vec{b}_2^\top &= (10,9,8,7,\dots,1)
+%\end{align}
+%Among all vectors that fulfill the constraints the one with minimum norm $\vec{u}^*$ has the shape $\vec{u}^* = \sum_i \alpha_i \vec{b}_i$ (see Theorem 2, Sec. 3.10 in Luenberger1969). Hence, we can derive that $\vec{u}^*$ takes the form:
+%\begin{equation}
+%\vec{u} = \alpha_1 \vec{b}_1 + \alpha_2 \vec{b}_2
+%\end{equation}
+%By plugging this into the constraints we can derive the coefficients $\alpha_i$:
+%\begin{align*}
+%\alpha_1 \innerprod{\vec b_1}{\vec b_1} + \alpha_2 \innerprod{\vec b_1}{\vec b_2} &= 0\\
+%\alpha_1 \innerprod{\vec b_2}{\vec b_1} + \alpha_2 \innerprod{\vec b_2}{\vec b_2} &= 10^4\\
+%\alpha_1 &= -666.655\\
+%\alpha_2 &= 121.21\\
+%\vec{u}^* &= \begin{pmatrix} 545.445 \\ 424.235 \\ 303.025 \\ 181.815 \\ 60.605 \\ -60.605 \\ -181.815 \\ -303.025 \\ -424.235 \\ -545.445 \end{pmatrix}
+%\end{align*}
+%\end{solution}
+
+
+% ================================= Norms ===================================
+
+%\begin{exercise}
+%  Is x a norm?
+%\end{exercise}
+%
+%% ================================ Hilbert Spaces ===============================
+%
+%\begin{exercise}
+%  Gram-Schmidt Orthonormalisation
+%\end{exercise}
+
+
+%\begin{exercise}[subtitle={Notebook}]
+%  Norm minimization with equality constraint
+%  We want to solve
+%
+%\begin{align*}
+%\min_x x^{\top}Q x\\
+%\text{such that } Ax = b
+%\end{align*}
+%\end{exercise}
+
+%\begin{exercise}
+%  Lab Exercise: Normal Equations
+%\end{exercise}
+
+\begin{exercise}[subtitle={Notebook}]
+  Follow the instructions in the notebook and reconstruct a face from the eigenfaces that span the vector space of faces.
+\end{exercise}
+
+
+\end{document}

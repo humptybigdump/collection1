@@ -1,0 +1,73 @@
+\input{../exercise_preamble.tex}
+
+\begin{document}
+
+\author{}
+\date{}
+\title{Optimization Methods for \\Machine Learning and Engineering\\\vspace{0.5cm}\textit{Exercise 8}}
+\maketitle
+
+%\printallsolutions*[]
+
+\setcounter{section}{8}
+\setcounter{exercise}{0}
+
+%\begin{solution}[print=true]
+%
+%\end{solution}
+
+\begin{exercise}[subtitle={Paper + Notebook}]
+\begin{center}
+\includegraphics[scale=0.4]{figures/santa-claus.png}
+\end{center}
+
+Santa Claus is happy that you solved his last optimal transport problem from exercise 7.2. He would like to trust you with another transportation problem: Santa has a special type of present that is only produced in Greenland and should be delivered to 78 Mio good children in the European Union, 60 Mio in the USA and 40 Mio in Brazil. He produces exactly the amount that is needed and would like to deliver the presents on a path which minimizes the travel distance times the number of loaded presents. As in Exercise 7.2 he does not consider distances where he has no presents loaded. The paths he can take with a loaded sleigh are sketched in the following graph:
+\begin{center}
+\includegraphics[scale=0.3]{figures/FlowGraph.pdf}
+\end{center}
+
+\begin{enumerate}[label=\emph{\alph*)}]
+\item \textit{Paper:} Formulate the optimization problem in the form:
+\begin{align*}
+\min_{\vec{x}} \quad & \vec{c}^\top \vec{x}\\
+\text{subject to} \quad & g(\vec{x}) \leq 0\\
+& \mat{A}\vec{x} - \vec{b} = \vec{0},
+\end{align*}
+\textit{Hint:} There should be as many equality constraints as there are countries in the graph. The number of incoming and outgoing presents (indicated by the arrows) from each country should sum up to the demand/supply of each country.
+\item \textit{Notebook:} Solve the problem using the function \texttt{ConstraintElimination\_ipm} from the optimization library.
+\item \textit{Notebook:} Solve the problem using the SCS solver from Julia. Compare the solutions. Do they agree?
+\end{enumerate}
+
+\end{exercise}
+
+
+\begin{exercise}[subtitle={Notebook}]
+
+Consider the truss structure problem given in lecture 6 (slides 5-10):
+  \begin{equation*}
+    \begin{aligned}
+    \min_{\substack{f_1, \dots, f_n\\ \tilde f_1,\dots, \tilde f_n}} \quad & \sum_{b=1}^n \Big[ \delta \cdot  \|\vec d_b\| \cdot \tilde f_b  \Big]\\
+    \text{subject to} \quad & 
+    \vec l_j + \sum_{b \in B_j} \Big[ \frac{\vec d_b}{\|\vec d_b\|} f_b \Big] = \vec 0, & j = 1,\dots,m\\
+    & \tilde f_b \geq f_b,\quad \tilde f_b \geq -f_b, & b = 1,\dots,n
+    \end{aligned}
+  \end{equation*}
+
+\begin{enumerate}[label=\emph{\alph*)}]
+%\item \textit{Paper:} The above problem neglects the weight of the beams. Modify the problem to add the weight of the beams to the equality constraints. Use $\delta = 5\cdot 10^{-4}\,$kg/(Nm).\\
+%\textit{Hint:} The absolute value $f$ of the gravitational force (in units of Newton) depends on the mass $m$ by $f = 9.81 m\,$ and acts only into the negative y-direction.
+\item Implement the problem as a linear program of the form:
+\begin{align*}
+ \min_{\vec{x}} \quad & \vec{c}^\top \vec{x}\\
+ \text{subject to} \quad & \mat{A}\vec{x} = \vec{b}\\
+ \quad & \mat{C}\vec{x} \leq \vec{0},
+\end{align*}
+
+with the target variable $\vec{x}^\top = (f_1, f_2, \dots, \tilde f_1, \tilde f_2, \dots)$. 
+\item Solve the problem using the SCS solver.
+\item Modify the problem, e.g. by changing the load or adding/removing cantilever points. Observe the effects on the optimized structure.
+\end{enumerate}
+\end{exercise}
+
+
+\end{document}
